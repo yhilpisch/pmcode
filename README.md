@@ -2,12 +2,12 @@
 
 # Python & Mathematics for Data Science and Machine Learning — Code Companion
 
-# (c) Dr. Yves J. Hilpisch | The Python Quants GmbH
-# AI-powered by GPT-5
+**&copy; Dr. Yves J. Hilpisch | The Python Quants GmbH**  
+**AI-powered by GPT-5**
 
-Welcome to the code companion repository for the book “Python & Mathematics for Data Science and Machine Learning”. This repository contains the executable code assets that accompany the book. It is designed as a practical counterpart: book PDF + this code repo = your complete learning resources.
+Welcome to the code companion repository for the book “Python & Mathematics for Data Science and Machine Learning”. This repository contains the executable code assets that accompany the book. It is designed as a practical counterpart: book manuscript + this code repo = your complete learning resources.
 
-What’s included here are the runnable Python scripts and Jupyter notebooks referenced throughout the chapters. The book sources (AsciiDoc, build tooling, etc.) are not part of this repository to keep it focused and lightweight for readers.
+What’s included here are the runnable Python scripts and Jupyter notebooks referenced throughout the chapters.
 
 ## Contents
 
@@ -24,19 +24,27 @@ Note: Many figure scripts save their outputs (SVG/PNG) to a local `figures/` dir
 
 2) Install dependencies:
 
-   pip install -r requirements.txt
+```
+pip install -r requirements.txt
+```
 
 3) Run a notebook of interest (interactive):
 
-   jupyter lab notebooks/ch02_python_essentials.ipynb
+```
+jupyter lab notebooks/ch02_python_essentials.ipynb
+```
 
 4) Run a chapter script (headless):
 
-   python code/chapters/ch02_python_essentials.py
+```
+python code/chapters/ch02_python_essentials.py
+```
 
 5) Generate a figure used in the book:
 
-   python code/figures/ch04_projection.py
+```
+python code/figures/ch04_projection.py
+```
 
 If you execute scripts in batch or on a server, you can enforce a headless Matplotlib backend via the environment variable `MPLBACKEND=Agg`.
 
@@ -52,10 +60,9 @@ If you execute scripts in batch or on a server, you can enforce a headless Matpl
 
 ## Acknowledgments
 
-This companion repository is maintained for readers of the book. The learning experience is optimized when used alongside the book PDF.
+This companion repository is maintained for readers of the book. The learning experience is optimized when used alongside the book manuscript.
 
-# (c) Dr. Yves J. Hilpisch | The Python Quants GmbH
-# AI-powered by GPT-5
+**&copy; Dr. Yves J. Hilpisch | The Python Quants GmbH**  
+**AI-powered by GPT-5**
 
 <img src="https://theaiengineer.dev/tae_logo_gw_flatter.png" width=35% align=right>
-
