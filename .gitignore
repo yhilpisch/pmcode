@@ -1,0 +1,44 @@
+# Python bytecode and caches
+__pycache__/
+*.py[cod]
+*.pyo
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Jupyter/IPython
+.ipynb_checkpoints/
+.ipython/
+.jupyter/
+
+# OS/editor noise
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+
+# Virtual environments
+.venv/
+venv/
+env/
+.env
+.env.*
+.python-version
+
+# Build/dist artifacts
+build/
+dist/
+*.egg-info/
+
+# Coverage/CI artifacts
+.coverage
+.coverage.*
+coverage.xml
+htmlcov/
+
+# Project data and generated outputs
+data/
+outputs/
+checkpoints/
+logs/
+figures/
