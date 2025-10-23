@@ -81,4 +81,4 @@ This companion repository is maintained for readers of the book. The learning ex
 
 This repository is provided "as is" for educational purposes. No warranties, guarantees, or representations of any kind are made regarding correctness, completeness, fitness for a particular purpose, or non‑infringement. Code and examples are intended for illustration and learning; they may omit production concerns (error handling, security, performance, robustness). Use at your own risk. Dependencies evolve over time; version changes can affect behavior or break examples.
 
-<img src="https://theaiengineer.dev/tae_logo_gw_flatter.png" width=35% align=right>
+<img src="https://theaiengineer.dev/tae_logo_gw_flat.png" width=35% align=right>
