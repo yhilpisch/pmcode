@@ -1,4 +1,5 @@
 <img src="https://theaiengineer.dev/tae_logo_gw_flatter.png" width=35% align=right>
+<br><br>
 
 # Python & Mathematics for Data Science and Machine Learning — Code Companion
 
