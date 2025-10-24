@@ -1,5 +1,4 @@
-<img src="https://theaiengineer.dev/tae_logo_gw_flat.png" width=35% align=right>
-<br><br>
+<img src="https://theaiengineer.dev/tae_logo_gw_flatter.png" width=35% align=right>
 
 # Python & Mathematics for Data Science and Machine Learning — Code Companion
 
@@ -79,6 +78,14 @@ This companion repository is maintained for readers of the book. The learning ex
 
 ## Disclaimer
 
-This repository is provided "as is" for educational purposes. No warranties, guarantees, or representations of any kind are made regarding correctness, completeness, fitness for a particular purpose, or non‑infringement. Code and examples are intended for illustration and learning; they may omit production concerns (error handling, security, performance, robustness). Use at your own risk. Dependencies evolve over time; version changes can affect behavior or break examples.
+The materials in this repository are provided strictly for illustrative and educational purposes and are supplied on an “as is” and “as available” basis. To the maximum extent permitted by applicable law:
 
-<img src="https://theaiengineer.dev/tae_logo_gw_flat.png" width=35% align=right>
+- No warranties or guarantees of any kind are made, whether express or implied (including but not limited to warranties of accuracy, completeness, non‑infringement, merchantability, or fitness for a particular purpose).
+- The authors and contributors shall not be liable for any direct, indirect, incidental, special, consequential, exemplary, or punitive damages arising out of or relating to the use of, reliance on, or inability to use these materials, even if advised of the possibility of such damages.
+- The code and examples are not professional advice (legal, financial, engineering, or otherwise). You are solely responsible for your use of the materials, including verifying correctness, ensuring appropriate safeguards (security, privacy, safety), and complying with all applicable laws and regulations.
+- External links, datasets, and third‑party libraries are subject to their own licenses and terms; availability and behavior may change without notice.
+- Product names, logos, and brands are property of their respective owners; use here is for identification purposes only and does not imply endorsement.
+
+Software dependencies evolve over time; version changes can affect behavior or break examples. Pin versions where reproducibility is critical and run tests appropriate for your use case.
+
+<img src="https://theaiengineer.dev/tae_logo_gw_flatter.png" width=35% align=right>
