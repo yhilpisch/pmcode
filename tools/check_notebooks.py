@@ -12,6 +12,7 @@ Configurable via CLI flags:
 - --fail-fast: stop on first failure (default: continue)
 - --outdir: if set, save executed notebooks to this dir (mirrors tree)
 - --list: only list selected notebooks and exit
+- --skip-execute: do not execute notebooks (checks structure/imports only)
 - --verbose: print extra details
 
 Exit code is non-zero if any notebook fails (unless --allow-errors is used).
@@ -19,6 +20,7 @@ Exit code is non-zero if any notebook fails (unless --allow-errors is used).
 from __future__ import annotations
 
 import argparse
+import warnings
 import re
 import sys
 import time
@@ -29,8 +31,11 @@ import tempfile
 import ast
 
 import nbformat
+from nbformat.validator import MissingIDFieldWarning
 from nbclient import NotebookClient
 from nbclient.exceptions import CellExecutionError
+
+warnings.filterwarnings("ignore", category=MissingIDFieldWarning)
 
 
 def find_notebooks(paths: Iterable[str], pattern: str, excludes: list[re.Pattern]) -> list[Path]:
@@ -209,6 +214,7 @@ def parse_args(argv: list[str]) -> argparse.Namespace:
     ap.add_argument("--normalize-ids", action="store_true", help="Normalize missing/duplicate cell ids before execution")
     ap.add_argument("--write-normalized", action="store_true", help="Write normalized notebooks back in place (only applies with --no-exec or when not using --outdir)")
     ap.add_argument("--no-exec", action="store_true", help="Do not execute notebooks; useful with --normalize-ids and --write-normalized")
+    ap.add_argument("--skip-execute", action="store_true", help="Alias for --no-exec")
     return ap.parse_args(argv)
 
 
@@ -223,6 +229,10 @@ def main(argv: list[str] | None = None) -> int:
         for nb in notebooks:
             print(nb)
         return 0
+    # Alias handling
+    if ns.skip_execute:
+        ns.no_exec = True
+
     # Only normalize without execution
     if ns.no_exec:
         total_changed = 0
@@ -282,19 +292,25 @@ def main(argv: list[str] | None = None) -> int:
         )
 
         # Execute
-        ex_t0 = time.perf_counter()
-        ok, dur, err, id_changes = execute_notebook(
-            nb_path,
-            ns.timeout,
-            ns.kernel,
-            ns.allow_errors,
-            ns.outdir,
-            ns.verbose,
-            ns.normalize_ids,
-        )
-        ex_dt = time.perf_counter() - ex_t0
-        ex_msg = "OK" if ok else "FAIL"
-        print(f"  • Execute: {ex_msg}   ({fmt_duration(ex_dt)})")
+        if ns.no_exec:
+            ex_msg = "SKIP (--no-exec)"
+            print(f"  • Execute: {ex_msg}")
+            ok = True
+            err = None
+        else:
+            ex_t0 = time.perf_counter()
+            ok, dur, err, id_changes = execute_notebook(
+                nb_path,
+                ns.timeout,
+                ns.kernel,
+                ns.allow_errors,
+                ns.outdir,
+                ns.verbose,
+                ns.normalize_ids,
+            )
+            ex_dt = time.perf_counter() - ex_t0
+            ex_msg = "OK" if ok else "FAIL"
+            print(f"  • Execute: {ex_msg}   ({fmt_duration(ex_dt)})")
 
         total_dt = time.perf_counter() - total_t0
         grand_total += total_dt

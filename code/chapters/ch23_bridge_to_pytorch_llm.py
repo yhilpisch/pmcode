@@ -2,11 +2,6 @@
 # (c) Dr. Yves J. Hilpisch | The Python Quants GmbH
 # AI-powered by GPT-5
 
-"""Generated from notebook: /Users/yves/Library/CloudStorage/Dropbox/Program/books/4_pm/notebooks/ch23_bridge_to_pytorch_llm.ipynb
-
-Do not edit by hand — re-generate via tools/export_chapters_from_notebooks.py.
-"""
-
 # ---- [cell 1] ----------------------------------------
 import numpy as np
 np.set_printoptions(precision=3, suppress=True)
@@ -31,7 +26,9 @@ print('CE=', float(ce))
 # Attention shape sanity
 n, d, dh = 5, 6, 3
 X = rs.normal(size=(n, d))
-Wq = rs.normal(size=(d, dh)); Wk = rs.normal(size=(d, dh)); Wv = rs.normal(size=(d, dh))
+Wq = rs.normal(size=(d, dh))
+Wk = rs.normal(size=(d, dh))
+Wv = rs.normal(size=(d, dh))
 Q, K, V = X @ Wq, X @ Wk, X @ Wv
 S = (Q @ K.T) / np.sqrt(dh)
 A = softmax(S)
