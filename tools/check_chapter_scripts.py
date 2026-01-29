@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # Python & Mathematics for Data Science and Machine Learning
 # (c) Dr. Yves J. Hilpisch | The Python Quants GmbH
-# AI-powered by GPT-5
+# AI-powered by GPT-5.x
 """Run all chapter scripts to verify they execute without error.
 
 This discovers `code/chapters/ch*.py` and runs each using a small wrapper
@@ -9,13 +9,17 @@ that enforces a headless Matplotlib backend and intercepts `plt.show()` to
 auto-save all open figures to a non-tracked folder, then close them. This
 prevents GUI windows from blocking execution.
 
-Environment variables:
+Environment variables (overridden by CLI flags if provided):
 - `PMDS_TIMEOUT_SEC`  per-script timeout (default: 120)
 - `PMDS_FILTER`       substring filter on filenames (e.g. "ch07")
 - `PMDS_OUTPUT_DIR`   where to save figures (default: `outputs/chapters`)
+
+CLI flags:
+- `--timeout`, `--filter`, `--output-dir`, `--dry-run`
 """
 from __future__ import annotations
 
+import argparse
 import os
 import subprocess as sp
 import sys
@@ -129,13 +133,30 @@ def probe_imports(mods: List[str]) -> Tuple[List[str], List[str]]:
 
 
 def main(argv: list[str] | None = None) -> int:
-    timeout = float(os.getenv("PMDS_TIMEOUT_SEC", "120"))
-    filt = os.getenv("PMDS_FILTER", "")
-    outdir = Path(os.getenv("PMDS_OUTPUT_DIR", str(ROOT / "outputs" / "chapters")))
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--timeout", type=float, default=None, help="per-script timeout in seconds")
+    ap.add_argument("--filter", type=str, default=None, help="substring filter on filenames")
+    ap.add_argument("--output-dir", type=str, default=None, help="where to save figures")
+    ap.add_argument("--dry-run", action="store_true", help="list scripts and exit")
+    args = ap.parse_args(argv)
+
+    timeout = args.timeout if args.timeout is not None else float(os.getenv("PMDS_TIMEOUT_SEC", "120"))
+    filt = args.filter if args.filter is not None else os.getenv("PMDS_FILTER", "")
+    outdir = Path(
+        args.output_dir
+        if args.output_dir is not None
+        else os.getenv("PMDS_OUTPUT_DIR", str(ROOT / "outputs" / "chapters"))
+    )
 
     paths = [p for p in iter_scripts() if (filt in p.name)]
     if not paths:
         print(f"No chapter scripts found in {SCRIPTS_DIR}")
+        return 0
+    if args.dry_run:
+        print(f"Dry run: {len(paths)} script(s) in {SCRIPTS_DIR}")
+        for p in paths:
+            print(p.relative_to(ROOT))
+        print(f"Output dir: {outdir}")
         return 0
 
     print(f"Running {len(paths)} script(s) with timeout={timeout:.0f}s each\n")

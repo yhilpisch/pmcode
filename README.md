@@ -3,7 +3,7 @@
 # Python & Mathematics for Data Science and Machine Learning — Code Companion
 
 **&copy; Dr. Yves J. Hilpisch | The Python Quants GmbH**  
-**AI-powered by GPT-5**
+**AI-powered by GPT-5.x**
 
 Welcome to the code companion repository for the book “Python & Mathematics for Data Science and Machine Learning”. This repository contains the executable code assets that accompany the book. It is designed as a practical counterpart: book manuscript + this code repo = your complete learning resources.
 
@@ -16,7 +16,7 @@ What’s included here are the runnable Python scripts and Jupyter notebooks ref
 - `code/figures/` — Standalone figure-generation scripts used to produce the figures in the book.
 - `requirements.txt` — Minimal dependency set to run the notebooks and scripts.
 
-Note: Many figure scripts save their outputs (SVG/PNG) to a local `figures/` directory when executed from the repository root. Use the commands below from the repo root for consistent behavior.
+Note: Many figure scripts save their outputs (PNG+PDF) to a local `figures/` directory when executed from the repository root. Use the commands below from the repo root for consistent behavior.
 
 ## Getting Started
 
@@ -27,7 +27,7 @@ python3 -m venv .venv
 # macOS/Linux
 source .venv/bin/activate
 # Windows (PowerShell)
-.venv\\Scripts\\Activate.ps1
+.venv\Scripts\Activate.ps1
 
 # optional but recommended
 python -m pip install -U pip
@@ -59,6 +59,23 @@ python code/figures/ch04_projection.py
 
 If you execute scripts in batch or on a server, you can enforce a headless Matplotlib backend via the environment variable `MPLBACKEND=Agg`.
 
+## Validation (Recommended)
+
+- Chapter scripts:
+  ```
+  python tools/validate_code.py
+  ```
+- Figure scripts:
+  ```
+  python tools/validate_figures.py
+  ```
+- Notebooks:
+  ```
+  python tools/validate_notebooks.py
+  ```
+
+Use `--skip-execute` if you only want static checks.
+
 ## Reproducibility
 
 - Scripts and notebooks prefer deterministic random number generation when relevant (fixed seeds or reproducible generators).
@@ -74,7 +91,7 @@ If you execute scripts in batch or on a server, you can enforce a headless Matpl
 This companion repository is maintained for readers of the book. The learning experience is optimized when used alongside the book manuscript.
 
 **&copy; Dr. Yves J. Hilpisch | The Python Quants GmbH**  
-**AI-powered by GPT-5**
+**AI-powered by GPT-5.x**
 
 ## Disclaimer
 

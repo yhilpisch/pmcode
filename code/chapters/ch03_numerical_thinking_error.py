@@ -1,11 +1,6 @@
 # Python & Mathematics for Data Science and Machine Learning
 # (c) Dr. Yves J. Hilpisch | The Python Quants GmbH
-# AI-powered by GPT-5
-
-"""Generated from notebook: /Users/yves/Library/CloudStorage/Dropbox/Program/books/4_pm/notebooks/ch03_numerical_thinking_error.ipynb
-
-Do not edit by hand — re-generate via tools/export_chapters_from_notebooks.py.
-"""
+# AI-powered by GPT-5.x
 
 # ---- [cell 1] ----------------------------------------
 # [magics stripped] %config InlineBackend.figure_format = 'retina'

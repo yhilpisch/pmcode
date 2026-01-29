@@ -2,72 +2,79 @@
 
 # Python & Mathematics for Data Science and Machine Learning
 # (c) Dr. Yves J. Hilpisch | The Python Quants GmbH
-# AI-powered by GPT-5
+# AI-powered by GPT-5.x
 
-This folder contains two validators to help you run and verify all code assets non‑interactively.
+This folder contains validators to help you run and verify all code assets non‑interactively.
 
 ## 1) Validate Chapter Scripts
 
-Script: `tools/check_chapter_scripts.py`
+Script: `tools/validate_code.py`
 
 What it does:
-- Discovers `code/chapters/ch*.py` and runs each script headlessly.
-- Forces a non-GUI Matplotlib backend and intercepts `plt.show()` to auto‑save figures to a folder, then closes them.
-- Prints detailed, per‑script diagnostics with timings.
+- Runs code checks (syntax + line length) across `code/`.
+- Executes `code/chapters/ch*.py` headlessly and captures errors.
 
 Usage examples:
 
-  python tools/check_chapter_scripts.py
+  python tools/validate_code.py
 
-  PMDS_FILTER=ch07 python tools/check_chapter_scripts.py
+  python tools/validate_code.py --skip-execute
 
-  PMDS_TIMEOUT_SEC=300 PMDS_OUTPUT_DIR=outputs/chapters python tools/check_chapter_scripts.py
+  python tools/validate_code.py --filter ch07
 
-Environment variables:
-- `PMDS_FILTER`: Substring to filter script filenames (e.g., `ch07`).
-- `PMDS_TIMEOUT_SEC`: Per‑script timeout in seconds (default: 120).
-- `PMDS_OUTPUT_DIR`: Where to save figures (default: `outputs/chapters`).
+Options:
+- `--skip-execute`: skip running scripts (only lint).
+- `--max-len`: line-length limit (default: 85).
+- `--filter`: substring filter for chapter scripts.
+- `--dry-run`: list what would run.
+
+## 2) Validate Figure Scripts
+
+Script: `tools/validate_figures.py`
+
+What it does:
+- Runs code checks (syntax + line length) across `code/figures`.
+- Executes all figure scripts headlessly and captures errors.
+
+Usage examples:
+
+  python tools/validate_figures.py
+
+  python tools/validate_figures.py --skip-execute
+
+  python tools/validate_figures.py --filter ch10
 
 Notes:
-- Figures are saved and windows never pop up.
-- Execute from the repository root so relative paths in scripts resolve correctly.
+- Figure scripts write PNG+PDF into `figures/`.
 
-## 2) Validate Notebooks
+## 3) Validate Notebooks
 
-Script: `tools/check_notebooks.py`
+Script: `tools/validate_notebooks.py`
 
 What it does:
 - Finds notebooks (default: `notebooks/*.ipynb`).
-- Prints detailed, per‑notebook diagnostics: structure, imports scan/probe, execution, and total time.
-- Executes with a headless Matplotlib backend and writable config/runtime directories.
+- Scans structure/imports and optionally executes notebooks.
 
 Usage examples:
 
-  python tools/check_notebooks.py --paths notebooks --timeout 180
+  python tools/validate_notebooks.py
 
-  python tools/check_notebooks.py --paths notebooks --pattern 'ch02_*.ipynb' --timeout 60 --fail-fast
+  python tools/validate_notebooks.py --skip-execute --normalize-ids --write-normalized
 
-  python tools/check_notebooks.py --outdir outputs/executed_notebooks
-
-Key options:
-- `--paths`: Files or directories to search (default: `notebooks`).
-- `--pattern`: Glob pattern within directories (default: `*.ipynb`).
-- `--exclude`: Regex to skip certain notebooks (repeatable).
-- `--timeout`: Per‑cell timeout seconds (default: 180).
-- `--kernel`: Jupyter kernel name (default: `python3`).
-- `--allow-errors`: Report but do not fail on cell exceptions.
-- `--fail-fast`: Stop on the first failure.
-- `--outdir`: Save executed notebooks under this directory (mirrors tree).
-- `--normalize-ids`: Ensure missing/duplicate cell IDs are normalized.
-- `--write-normalized`: Write normalized notebooks (with `--no-exec` or when not using `--outdir`).
-- `--no-exec`: Only normalize, do not execute.
+Options:
+- `--skip-execute`: skip execution (structure/imports only).
+- `--timeout`: per-cell timeout seconds (default: 180).
+- `--kernel`: kernel name (default: `python3`).
+- `--exclude`: regex to skip certain notebooks (repeatable).
+- `--normalize-ids`: normalize missing/duplicate cell IDs.
+- `--write-normalized`: write normalized notebooks.
 
 Notes:
-- The validator configures `MPLBACKEND=Agg`, `MPLCONFIGDIR`, `IPYTHONDIR`, and `JUPYTER_RUNTIME_DIR` to writable locations automatically.
+- The validators configure `MPLBACKEND=Agg`, `MPLCONFIGDIR`, `IPYTHONDIR`, and
+  `JUPYTER_RUNTIME_DIR` to writable locations automatically.
 - If you run into missing packages, install them via `pip install -r requirements.txt`.
 
 ## Tips
 
 - Prefer running from the repository root for consistent relative paths.
 - For headless servers, no GUI is required. Figures are saved automatically.
-

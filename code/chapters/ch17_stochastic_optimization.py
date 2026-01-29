@@ -1,11 +1,6 @@
 # Python & Mathematics for Data Science and Machine Learning
 # (c) Dr. Yves J. Hilpisch | The Python Quants GmbH
-# AI-powered by GPT-5
-
-"""Generated from notebook: /Users/yves/Library/CloudStorage/Dropbox/Program/books/4_pm/notebooks/ch17_stochastic_optimization.ipynb
-
-Do not edit by hand — re-generate via tools/export_chapters_from_notebooks.py.
-"""
+# AI-powered by GPT-5.x
 
 # ---- [cell 1] ----------------------------------------
 # [magics stripped] %config InlineBackend.figure_format = 'retina'
@@ -78,4 +73,5 @@ w_ref = np.zeros(X.shape[1])  # probe near origin
 g_full = grad_batch(w_ref, X, y)  # full gradient
 for B in (8, 16, 32, 64, 128):  # batch sizes
     g_mean, g_var = grad_stats(w_ref, X, y, B)  # stats
-    print(f'B={B:>3} unbiased~{np.allclose(g_mean, g_full, atol=5e-3)} var_sum={g_var.sum():.3e}')  # summary
+    unbiased = np.allclose(g_mean, g_full, atol=5e-3)
+    print(f"B={B:>3} unbiased~{unbiased} var_sum={g_var.sum():.3e}")  # summary

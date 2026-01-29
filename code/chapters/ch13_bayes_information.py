@@ -1,11 +1,6 @@
 # Python & Mathematics for Data Science and Machine Learning
 # (c) Dr. Yves J. Hilpisch | The Python Quants GmbH
-# AI-powered by GPT-5
-
-"""Generated from notebook: /Users/yves/Library/CloudStorage/Dropbox/Program/books/4_pm/notebooks/ch13_bayes_information.ipynb
-
-Do not edit by hand — re-generate via tools/export_chapters_from_notebooks.py.
-"""
+# AI-powered by GPT-5.x
 
 # ---- [cell 1] ----------------------------------------
 # [magics stripped] %config InlineBackend.figure_format = 'retina'
@@ -44,7 +39,12 @@ def beta_pdf(x: np.ndarray, a: float, b: float) -> np.ndarray:
 
 xs = np.linspace(0.0, 1.0, 500)
 fig, ax = plt.subplots(figsize=(6.4, 3.6))
-ax.plot(xs, beta_pdf(xs, alpha0, beta0), lw=1.8, label=f'Prior Beta({alpha0:.0f},{beta0:.0f})')
+ax.plot(
+    xs,
+    beta_pdf(xs, alpha0, beta0),
+    lw=1.8,
+    label=f'Prior Beta({alpha0:.0f},{beta0:.0f})',
+)
 ax.plot(xs, beta_pdf(xs, a1, b1), lw=2.2, label=f'Posterior Beta({a1},{b1})')
 ax.axvline(p_true, ls='--', color='#e84855', lw=1.4, label='p_true')
 ax.set_xlabel('p')
@@ -77,7 +77,8 @@ plt.show()
 # Small KL table for intuition
 pairs = [(0.1, 0.2), (0.1, 0.9), (0.3, 0.28), (0.9, 0.1)]
 for pp, qq in pairs:
-    print(f'D_KL(Ber({pp}) || Ber({qq})) = {KL_bernoulli(np.array([pp]), np.array([qq]))[0]:.4f} nats')
+    kl_val = KL_bernoulli(np.array([pp]), np.array([qq]))[0]
+    print(f"D_KL(Ber({pp}) || Ber({qq})) = {kl_val:.4f} nats")
 
 # ---- [cell 5] ----------------------------------------
 def cross_entropy_empirical(y, q):

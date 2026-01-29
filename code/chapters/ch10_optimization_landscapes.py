@@ -1,11 +1,6 @@
 # Python & Mathematics for Data Science and Machine Learning
 # (c) Dr. Yves J. Hilpisch | The Python Quants GmbH
-# AI-powered by GPT-5
-
-"""Generated from notebook: /Users/yves/Library/CloudStorage/Dropbox/Program/books/4_pm/notebooks/ch10_optimization_landscapes.ipynb
-
-Do not edit by hand — re-generate via tools/export_chapters_from_notebooks.py.
-"""
+# AI-powered by GPT-5.x
 
 # ---- [cell 1] ----------------------------------------
 
@@ -39,10 +34,17 @@ def grad_saddle(xy):
 def hess_saddle(_xy):
     return np.array([[2.0, 0.0], [0.0, -2.0]])
 
-for name, grad, hess in [("ridge", grad_ridge, hess_ridge), ("saddle", grad_saddle, hess_saddle)]:
+for name, grad, hess in [
+    ("ridge", grad_ridge, hess_ridge),
+    ("saddle", grad_saddle, hess_saddle),
+]:
     grad0 = grad((0.0, 0.0))
     eigs = np.linalg.eigvals(hess((0.0, 0.0)))
-    print(f"{name:>6}: ||grad||={np.linalg.norm(grad0):.1f} eigs={np.round(eigs, 2)}")
+    eigs_rounded = np.round(eigs, 2)
+    print(
+        f"{name:>6}: ||grad||={np.linalg.norm(grad0):.1f} "
+        f"eigs={eigs_rounded}"
+    )
 
 # ---- [cell 3] ----------------------------------------
 
@@ -118,5 +120,8 @@ def armijo_ok(f, xk, pk, grad_fk, eta, c1=1e-4):
 
 xk = np.array([0.8, 0.8])
 pk = -grad_ridge(xk)
-result = {eta: armijo_ok(f_ridge, xk, pk, grad_ridge(xk), eta) for eta in (0.05, 0.2, 0.35)}
+result = {
+    eta: armijo_ok(f_ridge, xk, pk, grad_ridge(xk), eta)
+    for eta in (0.05, 0.2, 0.35)
+}
 print(result)

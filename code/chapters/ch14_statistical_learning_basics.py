@@ -1,11 +1,6 @@
 # Python & Mathematics for Data Science and Machine Learning
 # (c) Dr. Yves J. Hilpisch | The Python Quants GmbH
-# AI-powered by GPT-5
-
-"""Generated from notebook: /Users/yves/Library/CloudStorage/Dropbox/Program/books/4_pm/notebooks/ch14_statistical_learning_basics.ipynb
-
-Do not edit by hand — re-generate via tools/export_chapters_from_notebooks.py.
-"""
+# AI-powered by GPT-5.x
 
 # ---- [cell 1] ----------------------------------------
 # [magics stripped] %config InlineBackend.figure_format = 'retina'
@@ -43,7 +38,11 @@ print('min test MSE at degree', deg_min)
 fig, ax = plt.subplots(figsize=(6.0,3.6))
 ax.plot(range(16), train_mse, '-o', label='train MSE')
 ax.plot(range(16), test_mse, '-o', label='test MSE')
-ax.set_xlabel('degree'); ax.set_ylabel('MSE'); ax.legend(); fig.tight_layout(); plt.show()
+ax.set_xlabel('degree')
+ax.set_ylabel('MSE')
+ax.legend()
+fig.tight_layout()
+plt.show()
 
 # ---- [cell 3] ----------------------------------------
 def ridge(X, y, lam):
@@ -63,7 +62,12 @@ tracks = np.array(tracks)
 fig, ax = plt.subplots(figsize=(6.4,3.6))
 for j, idx in enumerate(idx_sel):
     ax.plot(lams, tracks[:,j], label=f'w[{idx}]')
-ax.set_xscale('log'); ax.set_xlabel('lambda (log)'); ax.set_ylabel('coeff'); ax.legend(); fig.tight_layout(); plt.show()
+ax.set_xscale('log')
+ax.set_xlabel('lambda (log)')
+ax.set_ylabel('coeff')
+ax.legend()
+fig.tight_layout()
+plt.show()
 
 # ---- [cell 4] ----------------------------------------
 n, k = 40, 5

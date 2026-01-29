@@ -1,11 +1,6 @@
 # Python & Mathematics for Data Science and Machine Learning
 # (c) Dr. Yves J. Hilpisch | The Python Quants GmbH
-# AI-powered by GPT-5
-
-"""Generated from notebook: /Users/yves/Library/CloudStorage/Dropbox/Program/books/4_pm/notebooks/ch15_unconstrained_optimization.ipynb
-
-Do not edit by hand — re-generate via tools/export_chapters_from_notebooks.py.
-"""
+# AI-powered by GPT-5.x
 
 # ---- [cell 1] ----------------------------------------
 # [magics stripped] %config InlineBackend.figure_format = 'retina'
@@ -54,7 +49,10 @@ X, Y = np.meshgrid(xs, ys)
 Z = 0.5*(Q[0,0]*X**2 + 2*Q[0,1]*X*Y + Q[1,1]*Y**2)
 
 fig, ax = plt.subplots(1,2, figsize=(10,4), sharex=True, sharey=True)
-for a, path, col, title in [(ax[0], p_fix, '#e84855', 'Fixed step'), (ax[1], p_bt, '#1b998b', 'Backtracking')]:
+for a, path, col, title in [
+    (ax[0], p_fix, '#e84855', 'Fixed step'),
+    (ax[1], p_bt, '#1b998b', 'Backtracking'),
+]:
     a.contour(X, Y, Z, levels=12, cmap='viridis')  # contours
     a.plot(path[:,0], path[:,1], 'o-', color=col, ms=3)  # path
     a.plot([x0[0]], [x0[1]], 'o', color='k', ms=6)  # start
@@ -84,7 +82,8 @@ rho = max(abs(1 - alpha*mu), abs(1 - alpha*L))
 x = np.array([2.0, -1.5], float); ratios=[]
 for _ in range(40):
     x_prev = x.copy(); x = x - alpha * g(x)
-    if (np.linalg.norm(x_prev)>0): ratios.append(np.linalg.norm(x)/np.linalg.norm(x_prev))
+    if (np.linalg.norm(x_prev)>0):
+        ratios.append(np.linalg.norm(x)/np.linalg.norm(x_prev))
 emp = max(ratios) if ratios else 0.0
 print('Descent lemma:', ok, '| Monotone:', mono, '| Emp ≤ rho:', emp <= rho + 1e-12)
 print(f"rho_theory={rho:.3f}  emp_max={emp:.3f}")

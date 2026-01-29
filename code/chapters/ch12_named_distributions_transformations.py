@@ -1,11 +1,6 @@
 # Python & Mathematics for Data Science and Machine Learning
 # (c) Dr. Yves J. Hilpisch | The Python Quants GmbH
-# AI-powered by GPT-5
-
-"""Generated from notebook: /Users/yves/Library/CloudStorage/Dropbox/Program/books/4_pm/notebooks/ch12_named_distributions_transformations.ipynb
-
-Do not edit by hand — re-generate via tools/export_chapters_from_notebooks.py.
-"""
+# AI-powered by GPT-5.x
 
 # ---- [cell 1] ----------------------------------------
 # [magics stripped] %config InlineBackend.figure_format = 'retina'
@@ -28,7 +23,11 @@ for name, dist in dist_specs.items():
     samples = dist.rvs(size=40_000, random_state=rng).astype(np.float64)
     mean_emp = samples.mean()
     var_emp = samples.var(ddof=1)
-    print(f"{name:10s} mean: {mean_emp:.3f} vs {dist.mean():.3f}  var: {var_emp:.3f} vs {dist.var():.3f}")
+    msg = (
+        f"{name:10s} mean: {mean_emp:.3f} vs {dist.mean():.3f}  "
+        f"var: {var_emp:.3f} vs {dist.var():.3f}"
+    )
+    print(msg)
 
 # ---- [cell 3] ----------------------------------------
 def logsumexp_naive(arr):
@@ -47,13 +46,21 @@ gamma_dist = stats.gamma(a=3.0, scale=2.0)
 uniform_draws = rng.random(100_000)
 gamma_samples = gamma_dist.ppf(uniform_draws)
 ks_stat, ks_p = stats.kstest(gamma_samples, gamma_dist.cdf)
-print(f"KS p-value={ks_p:.3f}  empirical mean={gamma_samples.mean():.3f}  theory={gamma_dist.mean():.3f}")
+print(
+    f"KS p-value={ks_p:.3f}  empirical mean={gamma_samples.mean():.3f}  "
+    f"theory={gamma_dist.mean():.3f}"
+)
 
 # ---- [cell 5] ----------------------------------------
 x = np.linspace(-4, 4, 400)
 plt.figure(figsize=(10, 4))
 plt.plot(x, stats.norm().pdf(x), label='Normal(0,1)', lw=2.0)
-plt.plot(x, stats.gamma(a=2.0, scale=1.0).pdf(x.clip(min=0)), label='Gamma(2,1)', lw=2.0)
+plt.plot(
+    x,
+    stats.gamma(a=2.0, scale=1.0).pdf(x.clip(min=0)),
+    label='Gamma(2,1)',
+    lw=2.0,
+)
 plt.xlim(-4, 8)
 plt.legend(loc='upper right')
 plt.title('Continuous PDFs')

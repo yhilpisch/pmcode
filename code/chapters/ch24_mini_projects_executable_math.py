@@ -1,11 +1,6 @@
 # Python & Mathematics for Data Science and Machine Learning
 # (c) Dr. Yves J. Hilpisch | The Python Quants GmbH
-# AI-powered by GPT-5
-
-"""Generated from notebook: /Users/yves/Library/CloudStorage/Dropbox/Program/books/4_pm/notebooks/ch24_mini_projects_executable_math.ipynb
-
-Do not edit by hand — re-generate via tools/export_chapters_from_notebooks.py.
-"""
+# AI-powered by GPT-5.x
 
 # ---- [cell 1] ----------------------------------------
 import numpy as np
@@ -52,7 +47,14 @@ for _ in range(400):
 
 edges=np.linspace(0,1,11)
 ind=np.clip(np.searchsorted(edges, sigmoid(X@w+b), 'right')-1, 0, 9)
-ECE=lambda q: sum((np.sum(ind==k)/len(q))*abs(float(np.mean(y[ind==k]))-float(np.mean(q[ind==k]))) if np.any(ind==k) else 0.0 for k in range(10))
+def ECE(q):
+    total = 0.0
+    for k in range(10):
+        if np.any(ind == k):
+            acc = float(np.mean(y[ind == k]))
+            conf = float(np.mean(q[ind == k]))
+            total += (np.sum(ind == k) / len(q)) * abs(acc - conf)
+    return total
 p=sigmoid(X@w+b); pT=sigmoid((X@w+b)/1.5)
 print('ECE raw, temp =', round(ECE(p),3), round(ECE(pT),3))
 
@@ -71,6 +73,12 @@ for s in range(10,16):
         z=X@w+b; p=sigmoid(z)
         w -= 0.2 * ((X.T @ (p - y))/N + 1e-3*w)
         b -= 0.2 * float(np.mean(p - y))
-    def logloss(y,q): q=np.clip(q,1e-12,1-1e-12); return float(np.mean(-(y*np.log(q)+(1-y)*np.log(1-q))))
+    def logloss(y, q):
+        q = np.clip(q, 1e-12, 1 - 1e-12)
+        return float(np.mean(-(y * np.log(q) + (1 - y) * np.log(1 - q))))
     vals.append(logloss(y[int(0.7*N):], sigmoid((X[int(0.7*N):]@w+b))))
-print('mean, sd =', round(float(np.mean(vals)),3), round(float(np.std(vals,ddof=1)),3))
+print(
+    "mean, sd =",
+    round(float(np.mean(vals)), 3),
+    round(float(np.std(vals, ddof=1)), 3),
+)

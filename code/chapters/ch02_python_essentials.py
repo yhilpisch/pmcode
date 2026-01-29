@@ -1,11 +1,6 @@
 # Python & Mathematics for Data Science and Machine Learning
 # (c) Dr. Yves J. Hilpisch | The Python Quants GmbH
-# AI-powered by GPT-5
-
-"""Generated from notebook: /Users/yves/Library/CloudStorage/Dropbox/Program/books/4_pm/notebooks/ch02_python_essentials.ipynb
-
-Do not edit by hand — re-generate via tools/export_chapters_from_notebooks.py.
-"""
+# AI-powered by GPT-5.x
 
 # ---- [cell 1] ----------------------------------------
 # [magics stripped] %config InlineBackend.figure_format = 'retina'
@@ -124,7 +119,14 @@ D
 rng = np.random.default_rng(7)
 x = rng.standard_normal(size=50_000).astype(np.float64)
 fig, ax = plt.subplots(figsize=(6.4, 3.2), dpi=140)
-counts, bins, _ = ax.hist(x, bins=80, density=True, alpha=0.35, color='C0', label='samples (hist)')
+counts, bins, _ = ax.hist(
+    x,
+    bins=80,
+    density=True,
+    alpha=0.35,
+    color='C0',
+    label='samples (hist)',
+)
 grid = np.linspace(bins[0], bins[-1], 600)
 pdf = (1.0/np.sqrt(2*np.pi))*np.exp(-0.5*grid*grid)
 ax.plot(grid, pdf, color='C1', lw=2.0, label='analytic PDF')
@@ -140,7 +142,13 @@ ys = np.linspace(-3, 3, 200)
 Xg, Yg = np.meshgrid(xs, ys)
 Z = np.exp(-(Xg**2 + Yg**2))
 fig, ax = plt.subplots(figsize=(6.4, 3.2), dpi=140)
-im = ax.imshow(Z, extent=[xs.min(), xs.max(), ys.min(), ys.max()], origin='lower', cmap='viridis', aspect='auto')
+im = ax.imshow(
+    Z,
+    extent=[xs.min(), xs.max(), ys.min(), ys.max()],
+    origin='lower',
+    cmap='viridis',
+    aspect='auto',
+)
 fig.colorbar(im, ax=ax, shrink=0.85)
 ax.set_xlabel('x'); ax.set_ylabel('y')
 ax.set_title('Gaussian bump: z = exp(-(x^2 + y^2))')
