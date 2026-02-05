@@ -59,7 +59,7 @@ p=sigmoid(X@w+b); pT=sigmoid((X@w+b)/1.5)
 print('ECE raw, temp =', round(ECE(p),3), round(ECE(pT),3))
 
 # ---- [cell 4] ----------------------------------------
-# Seed sensitivity: mean±sd of log-loss across seeds
+# Seed sensitivity: mean+/-sd of log-loss across seeds
 rs = np.random.default_rng(24)
 vals=[]
 for s in range(10,16):

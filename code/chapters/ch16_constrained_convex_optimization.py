@@ -9,7 +9,7 @@ import matplotlib.pyplot as plt  # plotting
 plt.style.use('seaborn-v0_8')  # house style
 
 # ---- [cell 2] ----------------------------------------
-def grad(x, Q, c):  # ∇(0.5 x^T Q x + c^T x)
+def grad(x, Q, c):  # grad(0.5 x^T Q x + c^T x)
     return Q @ x + c
 
 def proj_box(x, lo, hi):  # clip to [lo,hi] per-coordinate
@@ -47,7 +47,7 @@ plt.tight_layout(); plt.show()
 # ---- [cell 3] ----------------------------------------
 Q = np.array([[4.0, 1.0],[1.0, 1.5]]); c = np.array([-2.0,-0.5])  # objective
 A = np.array([[1.0, 1.0]]); b = np.array([1.0])  # equality a^T x = b
-# Solve block KKT system [Q A^T; A 0][x;λ]=[-c;b]
+# Solve block KKT system [Q A^T; A 0][x;lambda]=[-c;b]
 K = np.block([[Q, A.T],[A, np.zeros((1,1))]])
 rhs = np.concatenate([-c, b])
 sol = np.linalg.solve(K, rhs); xstar, lam = sol[:2], sol[2]  # solution
@@ -74,7 +74,7 @@ I = np.eye(2)
 # Unconstrained minimizer
 x_unc = -np.linalg.solve(Q, c)
 print('||x_unc||=', np.linalg.norm(x_unc))
-# Bisection on λ to enforce ||x(λ)|| = R when boundary active
+# Bisection on lambda to enforce ||x(lambda)|| = R when boundary active
 if np.linalg.norm(x_unc) <= R + 1e-12:
     x_star, lam = x_unc, 0.0
 else:
@@ -90,7 +90,7 @@ else:
     lam = 0.5*(lo+hi)
     x_star = -np.linalg.solve(Q + lam*I, c)
 # KKT checks
-g = Q @ x_star + c  # ∇f(x*)
+g = Q @ x_star + c  # grad f(x*)
 phi = 0.5*(x_star @ x_star - R*R)  # constraint value
 stat = np.linalg.norm(g + lam * x_star)  # stationarity residual
 print('x*=', x_star, ' lambda=', lam)

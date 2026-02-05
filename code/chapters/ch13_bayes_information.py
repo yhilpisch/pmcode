@@ -50,7 +50,7 @@ ax.axvline(p_true, ls='--', color='#e84855', lw=1.4, label='p_true')
 ax.set_xlabel('p')
 ax.set_ylabel('density')
 ax.legend(loc='best')
-ax.set_title('Beta–Bernoulli: prior vs posterior')
+ax.set_title('Beta-Bernoulli: prior vs posterior')
 fig.tight_layout()
 plt.show()
 

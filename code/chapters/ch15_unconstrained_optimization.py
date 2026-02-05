@@ -18,7 +18,7 @@ def make_Q(L=50.0, m=1.0, theta_deg=30.0):  # SPD with rotation
 def f_quad(x, Q):  # 0.5 x^T Q x
     return 0.5 * float(x @ Q @ x)
 
-def g_quad(x, Q):  # ∇f = Q x
+def g_quad(x, Q):  # grad f = Q x
     return Q @ x
 
 def backtrack(x, Q, alpha0=0.2, beta=0.5, c=1e-4):  # Armijo backtracking
@@ -62,7 +62,7 @@ ax[0].set_ylabel('$x_2$')  # y label
 plt.tight_layout(); plt.show()  # render
 
 # ---- [cell 3] ----------------------------------------
-# Quadratic with known spectrum: L=10, μ=1
+# Quadratic with known spectrum: L=10, mu=1
 L, mu = 10.0, 1.0  # Lipschitz and strong convexity
 Q = np.diag([L, mu])  # SPD
 f = lambda v: 0.5*float(v @ Q @ v)  # objective
@@ -77,7 +77,7 @@ for _ in range(40):
     ok &= (fx_next <= bound + 1e-12)  # bound holds
     vals.append(fx_next); x = x_next
 mono = all(vals[i+1] <= vals[i] + 1e-12 for i in range(len(vals)-1))
-# Linear contraction vs theory ρ
+# Linear contraction vs theory rho
 rho = max(abs(1 - alpha*mu), abs(1 - alpha*L))
 x = np.array([2.0, -1.5], float); ratios=[]
 for _ in range(40):
@@ -85,7 +85,7 @@ for _ in range(40):
     if (np.linalg.norm(x_prev)>0):
         ratios.append(np.linalg.norm(x)/np.linalg.norm(x_prev))
 emp = max(ratios) if ratios else 0.0
-print('Descent lemma:', ok, '| Monotone:', mono, '| Emp ≤ rho:', emp <= rho + 1e-12)
+print('Descent lemma:', ok, '| Monotone:', mono, '| Emp <= rho:', emp <= rho + 1e-12)
 print(f"rho_theory={rho:.3f}  emp_max={emp:.3f}")
 
 # ---- [cell 4] ----------------------------------------

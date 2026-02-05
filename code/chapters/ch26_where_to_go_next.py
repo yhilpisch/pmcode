@@ -7,7 +7,7 @@ import numpy as np
 rs = np.random.default_rng(26)
 X = np.linspace(-1, 1, 64)[:, None]
 y = np.sin(3*X) + 0.1*rs.normal(size=X.shape)
-# 1-hidden layer tanh network: 1→16→1
+# 1-hidden layer tanh network: 1->16->1
 W1 = rs.normal(size=(1,16)); b1 = np.zeros((16,))
 W2 = rs.normal(size=(16,1)); b2 = np.zeros((1,))
 

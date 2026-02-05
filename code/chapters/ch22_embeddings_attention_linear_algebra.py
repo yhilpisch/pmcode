@@ -35,5 +35,5 @@ Wv = rs.normal(size=(d, dv))
 Q, K, V = X @ Wq, X @ Wk, X @ Wv
 O_nc, A_nc = attention(Q, K, V, causal=False)
 O_c, A_c = attention(Q, K, V, causal=True)
-print('rowsum(non-causal) →', np.round(A_nc.sum(1)[:3], 6))
-print('future mass (causal) →', float(np.triu(A_c,1).sum()))
+print('rowsum(non-causal) ->', np.round(A_nc.sum(1)[:3], 6))
+print('future mass (causal) ->', float(np.triu(A_c,1).sum()))

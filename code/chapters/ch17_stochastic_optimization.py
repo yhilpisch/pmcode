@@ -18,7 +18,7 @@ def make_linsep(n=400, d=2):  # synthetic data generator
     return X, y  # dataset
 
 def sigmoid(z):  # logistic link
-    return 1.0 / (1.0 + np.exp(-z))  # σ(z)
+    return 1.0 / (1.0 + np.exp(-z))  # logistic link
 
 def loss_batch(w, Xb, yb):  # mean log-loss
     z = Xb @ w  # scores
